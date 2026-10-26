@@ -13,9 +13,9 @@
 <div class="print-foot">RANA / AI COLLABORATION<span>01 / 12</span></div></section>
 <div class="journal"><aside class="toc" aria-label="流程导航"><p>工作流程</p><a href="#brief"><span>01</span>任务拆解</a>
 <a href="#investigate"><span>02</span>理解代码</a>
-<a href="#policy"><span>03</span>执行前核对方案</a>
-<a href="#implement"><span>04</span>分工执行</a>
-<a href="#manual"><span>05</span>人工独立推演</a>
+<a href="#implement"><span>03</span>分工执行</a>
+<a href="#manual"><span>04</span>人工独立推演</a>
+<a href="#policy"><span>05</span>评测规则复核</a>
 <a href="#optional"><span>06</span>选做修复</a>
 <a href="#integration"><span>07</span>本地联调</a>
 <a href="#review"><span>08</span>交付审查与精简</a>
@@ -47,25 +47,25 @@
       <figcaption><span>图 04</span>核对业务含义：年龄、兴趣标签和置信度来自旧业务，不参与模型路由选择。<a class="original" href="assets/evidence-01-40-48.png" target="_blank" rel="noopener">查看原图 ↗</a></figcaption></figure>
       <div class="print-foot">RANA / AI COLLABORATION<span>05 / 12</span></div>
     </section>
-<section class="chapter print-sheet" id="policy" aria-labelledby="title-policy">
-      <div class="chapter-intro"><div class="chapter-mark"><span>03</span><small>执行前核对方案</small></div>
-      <div class="chapter-copy"><h2 id="title-policy">先核对评测规则，再让 Agent 执行</h2><p>执行前，我会先检查 Agent 的理解和设计是否合理。第二题的重点之一，是为什么使用 pass、fail、abstain 三种状态，而不是只做一个加权分数。</p><p>三种状态分别表达通过、明确失败和证据不足或超出评测能力。总体采用 fail &gt; abstain &gt; pass：明确违规不能被其他得分抵消，无法判定也不能直接等同于错误。实现后，我又逐项追问弃评理由，核对是否存在不合理判断。</p><p class="editor-note">编排说明：页面按我的工作逻辑组织；这张后续复核截图用于补充解释三状态方案，不作为执行前讨论的时间证据。</p></div></div>
-      <figure><a class="evidence" href="assets/evidence-01-43-06.png" data-image aria-label="放大查看：先核对评测规则，再让 Agent 执行"><img src="assets/evidence-01-43-06.png" width="2048" height="1152" alt="这张截图记录的是实现后的 abstain 复核；本节按工作方法先介绍执行前的设计核对，再说明后续如何验证。" loading="lazy"></a>
-      <figcaption><span>图 05</span>这张截图记录的是实现后的 abstain 复核；本节按工作方法先介绍执行前的设计核对，再说明后续如何验证。<a class="original" href="assets/evidence-01-43-06.png" target="_blank" rel="noopener">查看原图 ↗</a></figcaption></figure>
-      <div class="print-foot">RANA / AI COLLABORATION<span>06 / 12</span></div>
-    </section>
 <section class="chapter print-sheet" id="implement" aria-labelledby="title-implement">
-      <div class="chapter-intro"><div class="chapter-mark"><span>04</span><small>分工执行</small></div>
+      <div class="chapter-intro"><div class="chapter-mark"><span>03</span><small>分工执行</small></div>
       <div class="chapter-copy"><h2 id="title-implement">确认思路之后，启动两个 Agent</h2><p>确认理解和方案后，我才让 Agent 开始三个必做部分，并强调遵守题目约束、记录决策、先写聚焦测试、保持实现简洁。</p><p>Agent A 承担主实现和整合，Agent B 独立完成离线评测及其测试，通过编排机制交付并接受交叉审查。必做部分完成并通过检查后，再判断是否进入选做。</p></div></div>
       <figure><a class="evidence" href="assets/evidence-01-41-14.png" data-image aria-label="放大查看：确认思路之后，启动两个 Agent"><img src="assets/evidence-01-41-14.png" width="2048" height="1152" alt="确认开始执行，并用编排机制管理 Agent B 的独立任务、交付记录和文件责任。" loading="lazy"></a>
-      <figcaption><span>图 06</span>确认开始执行，并用编排机制管理 Agent B 的独立任务、交付记录和文件责任。<a class="original" href="assets/evidence-01-41-14.png" target="_blank" rel="noopener">查看原图 ↗</a></figcaption></figure>
-      <div class="print-foot">RANA / AI COLLABORATION<span>07 / 12</span></div>
+      <figcaption><span>图 05</span>确认开始执行，并用编排机制管理 Agent B 的独立任务、交付记录和文件责任。<a class="original" href="assets/evidence-01-41-14.png" target="_blank" rel="noopener">查看原图 ↗</a></figcaption></figure>
+      <div class="print-foot">RANA / AI COLLABORATION<span>06 / 12</span></div>
     </section>
 <section class="chapter print-sheet" id="manual" aria-labelledby="title-manual">
-      <div class="chapter-intro"><div class="chapter-mark"><span>05</span><small>人工独立推演</small></div>
+      <div class="chapter-intro"><div class="chapter-mark"><span>04</span><small>人工独立推演</small></div>
       <div class="chapter-copy"><h2 id="title-manual">我先写出自己的答案，再和 Agent 对照</h2><p>在 Agent 工作期间，我也手动阅读任务和输入样例，独立排列自己的结论，再与 Agent 的结果比较。第一题逐个推演路由：哪些渠道满足条件、哪些被排除、如何排序、是否允许后备。</p><p>第二题逐项核对正确性、安全性和证据；第三题独立判断发布与回滚。比对时既检查结果是否一致，也检查理由是否成立，避免只看测试通过就接受结论。</p></div></div>
       <figure><a class="evidence" href="assets/evidence-01-42-17.png" data-image aria-label="放大查看：我先写出自己的答案，再和 Agent 对照"><img src="assets/evidence-01-42-17.png" width="2048" height="1152" alt="人工核对的入口与顺序：先看输入和契约，写下自己的判断，再查看测试预期与生成报告。" loading="lazy"></a>
-      <figcaption><span>图 07</span>人工核对的入口与顺序：先看输入和契约，写下自己的判断，再查看测试预期与生成报告。<a class="original" href="assets/evidence-01-42-17.png" target="_blank" rel="noopener">查看原图 ↗</a></figcaption></figure>
+      <figcaption><span>图 06</span>人工核对的入口与顺序：先看输入和契约，写下自己的判断，再查看测试预期与生成报告。<a class="original" href="assets/evidence-01-42-17.png" target="_blank" rel="noopener">查看原图 ↗</a></figcaption></figure>
+      <div class="print-foot">RANA / AI COLLABORATION<span>07 / 12</span></div>
+    </section>
+<section class="chapter print-sheet" id="policy" aria-labelledby="title-policy">
+      <div class="chapter-intro"><div class="chapter-mark"><span>05</span><small>评测规则复核</small></div>
+      <div class="chapter-copy"><h2 id="title-policy">比对之后，继续核对三状态评测规则</h2><p>在人工推演并与 Agent 的结果比对之后，我继续追问第二题的评测规则：为什么使用 pass、fail、abstain 三种状态，而不是只做一个加权分数？为什么有些判断保留为 abstain？</p><p>三种状态分别表达通过、明确失败和证据不足或超出评测能力。总体采用 fail &gt; abstain &gt; pass：明确违规不能被其他得分抵消，无法判定也不能直接等同于错误。我逐项核对弃评理由，检查是否存在不合理判断。</p></div></div>
+      <figure><a class="evidence" href="assets/evidence-01-43-06.png" data-image aria-label="放大查看：比对之后，继续核对三状态评测规则"><img src="assets/evidence-01-43-06.png" width="2048" height="1152" alt="在结果比对之后，继续复核实现中的 abstain 判断，区分题目证据不足与评测器能力限制。" loading="lazy"></a>
+      <figcaption><span>图 07</span>在结果比对之后，继续复核实现中的 abstain 判断，区分题目证据不足与评测器能力限制。<a class="original" href="assets/evidence-01-43-06.png" target="_blank" rel="noopener">查看原图 ↗</a></figcaption></figure>
       <div class="print-foot">RANA / AI COLLABORATION<span>08 / 12</span></div>
     </section>
 <section class="chapter print-sheet" id="optional" aria-labelledby="title-optional">
